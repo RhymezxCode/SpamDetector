@@ -66,6 +66,7 @@ class SharedPreference(context: Context) {
         editor.putString(key, value)
         editor.apply()
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     fun saveValue(key: String?, value: Boolean?) {
         val sharedPreferences = getEncryptedSharedPreferences()

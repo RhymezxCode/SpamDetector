@@ -13,7 +13,6 @@ class SmsReceiver : BroadcastReceiver() {
 
     private var mLastTimeReceived = System.currentTimeMillis()
 
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onReceive(p0: Context?, intent: Intent?) {
 

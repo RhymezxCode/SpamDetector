@@ -11,16 +11,13 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.kofo.spamdetector.R
 import com.kofo.spamdetector.data.preferences.SharedPreference
 import com.kofo.spamdetector.data.repository.CheckForSpamRepository
 import com.kofo.spamdetector.ui.MainActivity
 
-
 class SmsService : Service() {
     val NOTIFICATION_ID = 123
-    var isServiceRunning = false
     var local: Intent? = null
 
     @Nullable

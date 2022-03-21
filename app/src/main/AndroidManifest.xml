@@ -15,8 +15,6 @@
         android:theme="@style/Theme.SpamDetector"
         tools:targetApi="31">
 
-
-
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
@@ -36,6 +34,7 @@
             <intent-filter android:priority="2332412">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
+
         </receiver>
 
     </application>

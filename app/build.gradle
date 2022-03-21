@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.kofo.spamdetector"
-        minSdk 21
+        minSdk 23
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -33,6 +33,13 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+//    configurations {
+//        all { // You should exclude one of them not both of them
+//            exclude group: "com.android.support", module: "support-core-ui"
+//            exclude group: "com.android.support", module: "support-compat"
+//        }
+//    }
 }
 
 dependencies {
@@ -53,7 +60,7 @@ dependencies {
     //Encryption
     implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03'
 
-    //livedata
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    // For runtime permissions
+    implementation 'com.karumi:dexter:5.0.0'
+
 }
