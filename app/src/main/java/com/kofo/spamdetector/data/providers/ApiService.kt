@@ -13,6 +13,4 @@ object ApiService {
         .build()
         .create(ApiList::class.java)
 
-
-
 }

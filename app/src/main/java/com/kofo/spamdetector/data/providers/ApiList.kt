@@ -10,11 +10,10 @@ import retrofit2.http.Query
 interface ApiList {
 
     @POST("/spamchecker")
-    suspend fun checkForSpam(
+    fun checkForSpam(
         @Body body: String,
         @Query("threshold") threshold: Double
     ): Response<SmsMlResult> // body data
-
 
 }
 
