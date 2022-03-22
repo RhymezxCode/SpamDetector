@@ -2,14 +2,18 @@ package com.kofo.spamdetector.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -17,13 +21,14 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-import com.kofo.spamdetector.R
 import com.kofo.spamdetector.data.preferences.SharedPreference
 import com.kofo.spamdetector.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(){
+
+class MainActivity : AppCompatActivity() {
     private var backPass: Long? = 0
     private lateinit var binding: ActivityMainBinding
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,32 +36,49 @@ class MainActivity : AppCompatActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //permission
+        permission()
 
-        if(SharedPreference(this)
-                .getStringPreference(this, "SmsText") != null){
-            binding.fullInfo.text =  "Message From: " + SharedPreference(this)
+        //get data
+        data()
+
+        binding.root.setOnRefreshListener {
+
+
+            data()
+
+            binding.root.isRefreshing = false
+        }
+
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun data() {
+        if (SharedPreference(this)
+                .getStringPreference(this, "SmsText") != null
+        ) {
+            binding.fullInfo.text = "\nMessage From: " + SharedPreference(this)
                 .getStringPreference(this, "MessageFrom") +
-                    "Text Message: " + SharedPreference(this)
+                    "\n\nText Message: " + SharedPreference(this)
                 .getStringPreference(this, "SmsText") +
-                    "Result: " + SharedPreference(this)
+                    "\n\nResult: " + SharedPreference(this)
                 .getStringPreference(this, "TextResult")
 
             binding.user.visibility = View.VISIBLE
             binding.noData.visibility = View.GONE
             binding.fullInfo.visibility = View.VISIBLE
-        }else{
+            binding.title.visibility = View.VISIBLE
+
+            toast("last spam result!!!")
+        } else {
             binding.user.visibility = View.GONE
             binding.noData.visibility = View.VISIBLE
             binding.fullInfo.visibility = View.GONE
+            binding.title.visibility = View.GONE
 
             toast("No incoming messages to analyse!!!")
         }
-
-
-
-        //permission
-        permission()
-
     }
 
     private fun permission() {
