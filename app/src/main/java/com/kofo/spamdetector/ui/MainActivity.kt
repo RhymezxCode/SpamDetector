@@ -9,6 +9,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Html
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -58,12 +59,15 @@ class MainActivity : AppCompatActivity() {
         if (SharedPreference(this)
                 .getStringPreference(this, "SmsText") != null
         ) {
-            binding.fullInfo.text = "\nMessage From: " + SharedPreference(this)
+            binding.fullInfo.text = Html.fromHtml("" +
+                    "<br><b>Message From: </b>" + SharedPreference(this)
                 .getStringPreference(this, "MessageFrom") +
-                    "\n\nText Message: " + SharedPreference(this)
+                    "<br><br><b>Message Score: </b>" + SharedPreference(this)
+                .getStringPreference(this, "Score")+
+                    "<br><br><b>Text Message: </b>" + SharedPreference(this)
                 .getStringPreference(this, "SmsText") +
-                    "\n\nResult: " + SharedPreference(this)
-                .getStringPreference(this, "TextResult")
+                    "<br><br><b>Total Result: </b>" + SharedPreference(this)
+                .getStringPreference(this, "TextResult"))
 
             binding.user.visibility = View.VISIBLE
             binding.noData.visibility = View.GONE
