@@ -59,15 +59,17 @@ class MainActivity : AppCompatActivity() {
         if (SharedPreference(this)
                 .getStringPreference(this, "SmsText") != null
         ) {
-            binding.fullInfo.text = Html.fromHtml("" +
-                    "<br><b>Message From: </b>" + SharedPreference(this)
-                .getStringPreference(this, "MessageFrom") +
-                    "<br><br><b>Message Score: </b>" + SharedPreference(this)
-                .getStringPreference(this, "Score")+
-                    "<br><br><b>Text Message: </b>" + SharedPreference(this)
-                .getStringPreference(this, "SmsText") +
-                    "<br><br><b>Total Result: </b>" + SharedPreference(this)
-                .getStringPreference(this, "TextResult"))
+            binding.fullInfo.text = Html.fromHtml(
+                "" +
+                        "<br><b>Message From: </b>" + SharedPreference(this)
+                    .getStringPreference(this, "MessageFrom") +
+                        "<br><br><b>Message Score: </b>" + SharedPreference(this)
+                    .getStringPreference(this, "Score") +
+                        "<br><br><b>Text Message: </b>" + SharedPreference(this)
+                    .getStringPreference(this, "SmsText") +
+                        "<br><br><b>Total Result: </b>" + SharedPreference(this)
+                    .getStringPreference(this, "TextResult")
+            )
 
             binding.user.visibility = View.VISIBLE
             binding.noData.visibility = View.GONE
