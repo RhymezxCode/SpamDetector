@@ -33,13 +33,10 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-//    configurations {
-//        all { // You should exclude one of them not both of them
-//            exclude group: "com.android.support", module: "support-core-ui"
-//            exclude group: "com.android.support", module: "support-compat"
-//        }
-//    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
