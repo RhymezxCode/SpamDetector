@@ -12,7 +12,6 @@ import android.telephony.SmsMessage
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
 import com.kofo.spamdetector.R
 import com.kofo.spamdetector.data.model.SmsMlResult
 import com.kofo.spamdetector.data.preferences.SharedPreference
@@ -55,10 +54,11 @@ class SmsReceiver : BroadcastReceiver() {
 
                     val call = CheckForSpamRepository().checkForSpam(
                         SharedPreference(p0)
-                            .getStringPreference(p0, "MessageText")!!, 2.5
+                            .getStringPreference(p0, "MessageText")!!, 2.3
                     )
 
                     call.enqueue(object : Callback<SmsMlResult> {
+                        @RequiresApi(Build.VERSION_CODES.O)
                         override fun onResponse(
                             call: Call<SmsMlResult>,
                             response: Response<SmsMlResult>
@@ -86,6 +86,7 @@ class SmsReceiver : BroadcastReceiver() {
                             }
                         }
 
+                        @RequiresApi(Build.VERSION_CODES.O)
                         override fun onFailure(call: Call<SmsMlResult>, t: Throwable) {
                             toast(p0, "failed to fetch data!")
                             showNotification(p0, "failed")
@@ -104,8 +105,9 @@ class SmsReceiver : BroadcastReceiver() {
             .show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showNotification(context: Context, status: String) {
-        lateinit var mBuilder: NotificationCompat.Builder
+        lateinit var mBuilder: Notification.Builder
 
         val contentIntent = PendingIntent.getActivity(
             context, 123,
@@ -115,19 +117,19 @@ class SmsReceiver : BroadcastReceiver() {
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         when (status) {
             "isSpam" -> {
-                mBuilder = NotificationCompat.Builder(context, "com.kofo.spamdetector")
+                mBuilder = Notification.Builder(context, "com.kofo.spamdetector")
                     .setSmallIcon(R.drawable.ic_baseline_textsms_24)
                     .setContentTitle(context.resources.getString(R.string.app_name))
                     .setContentText("The Message recieved just now is a spam.")
             }
             "isNotSpam" -> {
-                mBuilder = NotificationCompat.Builder(context, "com.kofo.spamdetector")
+                mBuilder = Notification.Builder(context, "com.kofo.spamdetector")
                     .setSmallIcon(R.drawable.ic_baseline_textsms_24)
                     .setContentTitle(context.resources.getString(R.string.app_name))
                     .setContentText("The Message recieved just now is not a spam.")
             }
             "failed" -> {
-                mBuilder = NotificationCompat.Builder(context, "com.kofo.spamdetector")
+                mBuilder = Notification.Builder(context, "com.kofo.spamdetector")
                     .setSmallIcon(R.drawable.ic_baseline_textsms_24)
                     .setContentTitle(context.resources.getString(R.string.app_name))
                     .setContentText("Please, check your internet connection.")
