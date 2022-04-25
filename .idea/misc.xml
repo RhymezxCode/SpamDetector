@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/drawable/error_circle.xml" value="0.136" />
+        <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.136" />
+        <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/drawable/ic_baseline_keyboard_backspace_24.xml" value="0.1325" />
         <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/drawable/ic_baseline_warning_24.xml" value="0.1145" />
-        <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/layout/activity_main.xml" value="0.21" />
+        <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/layout/activity_all_sms.xml" value="0.221875" />
+        <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/layout/one_address.xml" value="0.5" />
+        <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/layout/one_sms.xml" value="0.2111111111111111" />
         <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1145" />
         <entry key="..\:/Users/jidex/Documents/Business/Start-up/kofo-project/SpamDetector/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1145" />
       </map>
