@@ -62,19 +62,14 @@ class AllSmsActivity : AppCompatActivity(), SmsListAdapter.ClickListener {
     }
 
     override fun gotoSmsPage(result: SmsMlResult) {
-
-        ActivityStarter.startActivity(
-            this@AllSmsActivity,
-            MainActivity().getMainActivityIntent(this).putExtras(
-                bundleOf(
-                    Pair("MessageFrom", result.from),
-                    Pair("Score", result.score),
-                    Pair("SmsText", result.text),
-                    Pair("TextResult", result.result),
-                    Pair("Status", result.is_spam)
-                )
-            ), true
-        )
-
+        val intent = Intent(this, MainActivity::class.java)
+        val extra = bundleOf(
+            "MessageFrom" to result.from,
+            "Score" to result.score,
+            "SmsText" to result.text,
+            "TextResult" to result.result,
+            "Status" to result.is_spam)
+        intent.putExtras(extra)
+        startActivity(intent)
     }
 }

@@ -79,11 +79,10 @@
             android:layout_width="115dp"
             android:layout_height="128dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
             android:src="@drawable/circle_pass"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/top_label" />
 
         <ImageView
             android:id="@+id/pass_icon"

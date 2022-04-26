@@ -12,7 +12,9 @@ import android.telephony.SmsMessage
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.LiveData
 import com.kofo.spamdetector.R
+import com.kofo.spamdetector.application.SpamDetectorApplication
 import com.kofo.spamdetector.data.model.SmsMlResult
 import com.kofo.spamdetector.data.preference.SharedPreference
 import com.kofo.spamdetector.data.repository.CheckForSpamRepository
@@ -23,7 +25,10 @@ import retrofit2.Response
 
 
 class SmsReceiver : BroadcastReceiver() {
-
+    var smsRepository: CheckForSpamRepository.DbRepository? = null
+    init {
+        smsRepository = CheckForSpamRepository().DbRepository(SpamDetectorApplication())
+    }
     override fun onReceive(p0: Context?, intent: Intent?) {
         val pdus: Array<*>
         val msgs: Array<SmsMessage?>
@@ -62,6 +67,19 @@ class SmsReceiver : BroadcastReceiver() {
                             response: Response<SmsMlResult>
                         ) {
                             if (response.code() == 200) {
+
+                                smsRepository!!.insertSms(
+                                    SmsMlResult(
+                                        null,
+                                        response.body()!!.is_spam,
+                                        response.body()!!.result,
+                                        response.body()!!.score,
+                                        response.body()!!.text,
+                                        msgFrom.toString(),
+                                        msgText.toString(),
+                                        ""
+                                    )
+                                )
                                 SharedPreference(p0).saveValue(
                                     "TextResult",
                                     response.body()!!.result

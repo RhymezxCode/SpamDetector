@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.view.View
 import android.widget.Toast
@@ -85,9 +87,11 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun data() {
-        if (getMainActivityIntent(this@MainActivity).extras != null) {
+        val sms = intent.extras?.getString("SmsText")
+        if (!sms.isNullOrEmpty()) {
 
-            when (getMainActivityIntent(this@MainActivity).extras!!.getBoolean("Status")) {
+            toast("From Bundle")
+            when (intent.extras!!.getBoolean("Status")) {
                 true -> {
                     binding.circleError.visibility = View.VISIBLE
                     binding.errorIcon.visibility = View.VISIBLE
@@ -110,26 +114,28 @@ class MainActivity : AppCompatActivity() {
             binding.totalResult.visibility = View.VISIBLE
             binding.allMessages.visibility = View.VISIBLE
 
-            binding.messageFrom.text = getMainActivityIntent(this@MainActivity).extras!!
+            binding.messageFrom.text = intent.extras!!
                 .getString("MessageFrom")
 
-            binding.messageScore.text = getMainActivityIntent(this@MainActivity).extras!!
-                .getString("Score")
+            binding.messageScore.text = intent.extras!!
+                .getDouble("Score").toString()
 
-            binding.textMessage.text = getMainActivityIntent(this@MainActivity).extras!!
+            binding.textMessage.text = intent.extras!!
                 .getString("SmsText")
 
-            binding.totalResult.text = getMainActivityIntent(this@MainActivity).extras!!
+            binding.totalResult.text = intent.extras!!
                 .getString("TextResult")
 
-            toast("last spam result!!!")
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                toast("last spam result!!!")
+            }, 2000)
 
         } else {
 
             if (SharedPreference(this)
                     .getStringPreference("SmsText") != null
             ) {
-
 
                 when (SharedPreference(this).getBoolPreference("IsSpam")!!) {
                     true -> {
@@ -170,7 +176,9 @@ class MainActivity : AppCompatActivity() {
                 binding.totalResult.text = SharedPreference(this)
                     .getStringPreference("TextResult")
 
-                toast("last spam result!!!")
+                Handler(Looper.getMainLooper()).postDelayed({
+                    toast("last spam result!!!")
+                }, 2000)
 
 
             } else {
@@ -192,9 +200,14 @@ class MainActivity : AppCompatActivity() {
                 binding.textMessageLabel.visibility = View.GONE
                 binding.totalResultLabel.visibility = View.GONE
 
-                toast("No incoming messages to analyse!!!")
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    toast("No incoming messages to analyse!!!")
+                }, 2000)
             }
         }
+
+
     }
 
     private fun addSms(context: Context?) {
