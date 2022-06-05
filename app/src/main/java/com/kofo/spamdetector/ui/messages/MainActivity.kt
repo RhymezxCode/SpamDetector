@@ -48,22 +48,22 @@ class MainActivity : AppCompatActivity() {
         smsViewModel = ViewModelProvider(this)[SmsViewModel::class.java]
 
         with(binding) {
-        //permission
-        permission()
+            //permission
+            permission()
 
-        //get data
-        data()
-
-        checkSmsRedundancyAndInsert()
-
-        root.setOnRefreshListener {
-
+            //get data
             data()
 
             checkSmsRedundancyAndInsert()
 
-            root.isRefreshing = false
-        }
+            root.setOnRefreshListener {
+
+                data()
+
+                checkSmsRedundancyAndInsert()
+
+                root.isRefreshing = false
+            }
 
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Ham"))
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Spam"))
@@ -82,7 +82,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onTabReselected(tab: TabLayout.Tab) {}
             })
 
-            binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            binding.viewPager2.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
                 }
@@ -90,14 +91,14 @@ class MainActivity : AppCompatActivity() {
 
 
             allMessages.setOnClickListener {
-            ActivityStarter.startActivity(
-                this@MainActivity,
-                AllSmsActivity().getAllSmsActivityIntent(this@MainActivity),
-                false
-            )
-        }
+                ActivityStarter.startActivity(
+                    this@MainActivity,
+                    AllSmsActivity().getAllSmsActivityIntent(this@MainActivity),
+                    false
+                )
+            }
 
-    }
+        }
     }
 
     private fun checkSmsRedundancyAndInsert() {
@@ -119,27 +120,27 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     fun data() {
         with(binding) {
-        val sms = intent.extras?.getString("SmsText")
-        if (!sms.isNullOrEmpty()) {
+            val sms = intent.extras?.getString("SmsText")
+            if (!sms.isNullOrEmpty()) {
 
 
-            toast("From Bundle")
-            when (intent.extras!!.getBoolean("Status")) {
-                true -> {
+                toast("From Bundle")
+                when (intent.extras!!.getBoolean("Status")) {
+                    true -> {
 //                    circleError.visibility = View.VISIBLE
 //                    errorIcon.visibility = View.VISIBLE
 //                    circlePass.visibility = View.GONE
 //                    passIcon.visibility = View.GONE
-                }
-                false -> {
+                    }
+                    false -> {
 //                    circlePass.visibility = View.VISIBLE
 //                    passIcon.visibility = View.VISIBLE
 //                    circleError.visibility = View.GONE
 //                    errorIcon.visibility = View.GONE
+                    }
                 }
-            }
 
-            noData.visibility = View.GONE
+                noData.visibility = View.GONE
 //            title.visibility = View.VISIBLE
 //            messageFrom.visibility = View.VISIBLE
 //            messageScore.visibility = View.VISIBLE
@@ -160,39 +161,39 @@ class MainActivity : AppCompatActivity() {
 //                .getString("TextResult")
 
 
-            Handler(Looper.getMainLooper()).postDelayed({
-                toast("last spam result!!!")
-            }, 2000)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    toast("last spam result!!!")
+                }, 2000)
 
-        } else {
+            } else {
 
-            if (SharedPreference(this@MainActivity)
-                    .getStringPreference("SmsText") != null
-            ) {
+                if (SharedPreference(this@MainActivity)
+                        .getStringPreference("SmsText") != null
+                ) {
 
-                when (SharedPreference(this@MainActivity)
-                    .getBoolPreference("IsSpam")!!) {
-                    true -> {
+                    when (SharedPreference(this@MainActivity)
+                        .getBoolPreference("IsSpam")!!) {
+                        true -> {
 //                        circleError.visibility = View.VISIBLE
 //                       errorIcon.visibility = View.VISIBLE
 //                        circlePass.visibility = View.GONE
 //                        passIcon.visibility = View.GONE
-                    }
-                    false -> {
+                        }
+                        false -> {
 //                        circlePass.visibility = View.VISIBLE
 //                        passIcon.visibility = View.VISIBLE
 //                        circleError.visibility = View.GONE
 //                        errorIcon.visibility = View.GONE
+                        }
                     }
-                }
 
-                noData.visibility = View.GONE
+                    noData.visibility = View.GONE
 //                title.visibility = View.VISIBLE
 //                messageFrom.visibility = View.VISIBLE
 //                messageScore.visibility = View.VISIBLE
 //                textMessage.visibility = View.VISIBLE
 //                totalResult.visibility = View.VISIBLE
-                allMessages.visibility = View.VISIBLE
+                    allMessages.visibility = View.VISIBLE
 //                messageFromLabel.visibility = View.VISIBLE
 //                messageScoreLabel.visibility = View.VISIBLE
 //                textMessageLabel.visibility = View.VISIBLE
@@ -209,24 +210,24 @@ class MainActivity : AppCompatActivity() {
 //                totalResult.text = SharedPreference(this@MainActivity)
 //                    .getStringPreference("TextResult")
 
-                Handler(Looper.getMainLooper()).postDelayed({
-                    toast("last spam result!!!")
-                }, 2000)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        toast("last spam result!!!")
+                    }, 2000)
 
 
-            } else {
+                } else {
 
 //                circlePass.visibility = View.GONE
 //                passIcon.visibility = View.GONE
 //                circleError.visibility = View.GONE
 //                errorIcon.visibility = View.GONE
-                noData.visibility = View.VISIBLE
+                    noData.visibility = View.VISIBLE
 //                title.visibility = View.GONE
 //                messageFrom.visibility = View.GONE
 //                messageScore.visibility = View.GONE
 //                textMessage.visibility = View.GONE
 //                totalResult.visibility = View.GONE
-                allMessages.visibility = View.GONE
+                    allMessages.visibility = View.GONE
 
 //               messageFromLabel.visibility = View.GONE
 //                messageScoreLabel.visibility = View.GONE
@@ -234,41 +235,47 @@ class MainActivity : AppCompatActivity() {
 //                totalResultLabel.visibility = View.GONE
 
 
-                Handler(Looper.getMainLooper()).postDelayed({
-                    toast("No incoming messages to analyse!!!")
-                }, 2000)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        toast("No incoming messages to analyse!!!")
+                    }, 2000)
+                }
             }
-        }
 
-    }
+        }
     }
 
     private fun addSms(context: Context?) {
         smsViewModel!!.insertSmsNow(
-            SharedPreference(context!!).getBoolPreference("IsSpam")?.let { isSpam ->
-                SharedPreference(context).getStringPreference("TextResult")?.let { textResult ->
-                    SharedPreference(context).getStringPreference("Score")?.let { score ->
-                        SharedPreference(context).getStringPreference("SmsText")?.let { smsText ->
-                            SharedPreference(context).getStringPreference("MessageFrom")
-                                ?.let { messageFrom ->
-                                    SharedPreference(context).getStringPreference("MessageText")
-                                        ?.let { messageText ->
-                                            SmsMlResult(
-                                                null,
-                                                isSpam,
-                                                textResult,
-                                                score.toDouble(),
-                                                smsText,
-                                                messageFrom,
-                                                messageText,
-                                                ""
-                                            )
+            SharedPreference(context!!)
+                .getBoolPreference("IsSpam")?.let { isSpam ->
+                    SharedPreference(context)
+                        .getStringPreference("TextResult")?.let { textResult ->
+                            SharedPreference(context)
+                                .getStringPreference("Score")?.let { score ->
+                                    SharedPreference(context)
+                                        .getStringPreference("SmsText")?.let { smsText ->
+                                            SharedPreference(context)
+                                                .getStringPreference("MessageFrom")
+                                                ?.let { messageFrom ->
+                                                    SharedPreference(context)
+                                                        .getStringPreference("MessageText")
+                                                        ?.let { messageText ->
+                                                            SmsMlResult(
+                                                                null,
+                                                                isSpam,
+                                                                textResult,
+                                                                score.toDouble(),
+                                                                smsText,
+                                                                messageFrom,
+                                                                messageText,
+                                                                ""
+                                                            )
+                                                        }
+                                                }
                                         }
                                 }
                         }
-                    }
                 }
-            }
         )
     }
 

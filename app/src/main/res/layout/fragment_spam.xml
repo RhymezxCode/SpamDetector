@@ -6,6 +6,7 @@
     tools:context=".ui.messages.spam.SpamFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messages_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/one_sms" />
