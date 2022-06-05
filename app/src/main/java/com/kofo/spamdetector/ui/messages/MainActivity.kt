@@ -28,6 +28,8 @@ import com.kofo.spamdetector.data.model.SmsMlResult
 import com.kofo.spamdetector.data.preference.SharedPreference
 import com.kofo.spamdetector.data.service.ActivityStarter
 import com.kofo.spamdetector.databinding.ActivityMainBinding
+import com.kofo.spamdetector.ui.messages.option.OptionActivity
+import com.kofo.spamdetector.ui.messages.search.SearchActivity
 
 class MainActivity : AppCompatActivity() {
     private var backPass: Long? = 0
@@ -94,6 +96,22 @@ class MainActivity : AppCompatActivity() {
                 ActivityStarter.startActivity(
                     this@MainActivity,
                     AllSmsActivity().getAllSmsActivityIntent(this@MainActivity),
+                    false
+                )
+            }
+
+            menu.setOnClickListener {
+                ActivityStarter.startActivity(
+                    this@MainActivity,
+                    OptionActivity().getOptionActivityIntent(this@MainActivity),
+                    false
+                )
+            }
+
+            search.setOnClickListener {
+                ActivityStarter.startActivity(
+                    this@MainActivity,
+                    SearchActivity().getSearchActivityIntent(this@MainActivity),
                     false
                 )
             }

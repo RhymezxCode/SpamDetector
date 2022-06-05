@@ -44,8 +44,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TableLayout
-        android:layout_width="409dp"
-        android:layout_height="662dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Share"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/cardview_dark_background"
                 android:textSize="20sp" />
         </TableRow>
 

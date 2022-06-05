@@ -36,7 +36,7 @@ class HamFragment : Fragment() {
             if (it.isNotEmpty()) {
 
                 for(sms in it){
-                    if(!sms.is_spam){
+                    if(sms.is_spam){
                         hamSmsList.add(sms)
                     }
                 }

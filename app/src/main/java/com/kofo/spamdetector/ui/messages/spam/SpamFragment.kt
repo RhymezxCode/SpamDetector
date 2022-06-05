@@ -35,7 +35,7 @@ class SpamFragment : Fragment() {
             if (it.isNotEmpty()) {
 
                 for(sms in it){
-                    if(sms.is_spam){
+                    if(!sms.is_spam){
                         spamSmsList.add(sms)
                     }
                 }

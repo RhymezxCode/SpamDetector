@@ -39,7 +39,8 @@ class SmsListAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SmsHolder {
         val listItem =
-            LayoutInflater.from(parent.context).inflate(R.layout.one_sms, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.one_sms, parent,
+                false)
         return SmsHolder(listItem)
     }
 
@@ -63,6 +64,7 @@ class SmsListAdapter :
     inner class SmsHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
+
         var messageFrom: TextView = itemView.findViewById(R.id.message_from)
         var messageText: TextView = itemView.findViewById(R.id.message_text)
         var messageIcon: ImageView = itemView.findViewById(R.id.message_icon)
