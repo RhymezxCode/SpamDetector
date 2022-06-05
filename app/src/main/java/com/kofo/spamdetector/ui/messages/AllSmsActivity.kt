@@ -45,6 +45,8 @@ class AllSmsActivity : AppCompatActivity(), SmsListAdapter.ClickListener {
 
         }
 
+
+
         binding.back.setOnClickListener {
             finish()
         }

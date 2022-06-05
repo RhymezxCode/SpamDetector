@@ -13,8 +13,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayout
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private var backPass: Long? = 0
     private var smsViewModel: SmsViewModel? = null
     private lateinit var binding: ActivityMainBinding
+    private var adapter: MessagesTabAdapter? = null
 
     fun getMainActivityIntent(context: Context?): Intent {
         return Intent(context, MainActivity::class.java)
@@ -61,7 +65,31 @@ class MainActivity : AppCompatActivity() {
             root.isRefreshing = false
         }
 
-        allMessages.setOnClickListener {
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Ham"))
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Spam"))
+
+            val fragmentManager: FragmentManager = this@MainActivity.supportFragmentManager
+            adapter = MessagesTabAdapter(fragmentManager, lifecycle)
+            binding.viewPager2.adapter = adapter
+
+
+            binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    binding.viewPager2.currentItem = tab.position
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab) {}
+                override fun onTabReselected(tab: TabLayout.Tab) {}
+            })
+
+            binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
+                }
+            })
+
+
+            allMessages.setOnClickListener {
             ActivityStarter.startActivity(
                 this@MainActivity,
                 AllSmsActivity().getAllSmsActivityIntent(this@MainActivity),

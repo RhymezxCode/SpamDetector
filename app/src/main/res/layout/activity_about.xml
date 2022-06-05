@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.messages.AllSmsActivity">
+    tools:context=".ui.messages.about.AboutActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_label"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/roboto_bold"
-            android:text="All Messages"
+            android:text="About"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -43,30 +43,21 @@
             app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sms_recycler"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_label" />
-
     <TextView
-        android:id="@+id/no_data"
+        android:id="@+id/info"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:gravity="center_horizontal"
-        android:text="No Messages inside database yet!"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:text="Xspam enables you to detect text messages which are spam. It also enables users to categorize messages into spam and ham"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/top_label" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
