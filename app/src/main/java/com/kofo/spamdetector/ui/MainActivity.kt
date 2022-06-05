@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         smsViewModel = ViewModelProvider(this)[SmsViewModel::class.java]
 
+        with(binding) {
         //permission
         permission()
 
@@ -51,31 +52,33 @@ class MainActivity : AppCompatActivity() {
 
         checkSmsRedundancyAndInsert()
 
-        binding.root.setOnRefreshListener {
+        root.setOnRefreshListener {
 
             data()
 
             checkSmsRedundancyAndInsert()
 
-            binding.root.isRefreshing = false
+            root.isRefreshing = false
         }
 
-        binding.allMessages.setOnClickListener {
+        allMessages.setOnClickListener {
             ActivityStarter.startActivity(
                 this@MainActivity,
-                AllSmsActivity().getAllSmsActivityIntent(this), false
+                AllSmsActivity().getAllSmsActivityIntent(this@MainActivity),
+                false
             )
         }
 
     }
+    }
 
     private fun checkSmsRedundancyAndInsert() {
-        smsViewModel!!.checkSms(
+        smsViewModel?.checkSms(
             SharedPreference(this).getStringPreference("SmsText"),
             SharedPreference(this).getStringPreference("MessageText")
         )
 
-        smsViewModel!!.getCheckedSms().observe(this) {
+        smsViewModel?.getCheckedSms()?.observe(this) {
             if (it > 0) {
                 toast("SMS already exists in database")
             } else {
@@ -87,43 +90,45 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun data() {
+        with(binding) {
         val sms = intent.extras?.getString("SmsText")
         if (!sms.isNullOrEmpty()) {
+
 
             toast("From Bundle")
             when (intent.extras!!.getBoolean("Status")) {
                 true -> {
-                    binding.circleError.visibility = View.VISIBLE
-                    binding.errorIcon.visibility = View.VISIBLE
-                    binding.circlePass.visibility = View.GONE
-                    binding.passIcon.visibility = View.GONE
+                    circleError.visibility = View.VISIBLE
+                    errorIcon.visibility = View.VISIBLE
+                    circlePass.visibility = View.GONE
+                    passIcon.visibility = View.GONE
                 }
                 false -> {
-                    binding.circlePass.visibility = View.VISIBLE
-                    binding.passIcon.visibility = View.VISIBLE
-                    binding.circleError.visibility = View.GONE
-                    binding.errorIcon.visibility = View.GONE
+                    circlePass.visibility = View.VISIBLE
+                    passIcon.visibility = View.VISIBLE
+                    circleError.visibility = View.GONE
+                    errorIcon.visibility = View.GONE
                 }
             }
 
-            binding.noData.visibility = View.GONE
-            binding.title.visibility = View.VISIBLE
-            binding.messageFrom.visibility = View.VISIBLE
-            binding.messageScore.visibility = View.VISIBLE
-            binding.textMessage.visibility = View.VISIBLE
-            binding.totalResult.visibility = View.VISIBLE
-            binding.allMessages.visibility = View.VISIBLE
+            noData.visibility = View.GONE
+            title.visibility = View.VISIBLE
+            messageFrom.visibility = View.VISIBLE
+            messageScore.visibility = View.VISIBLE
+            textMessage.visibility = View.VISIBLE
+            totalResult.visibility = View.VISIBLE
+            allMessages.visibility = View.VISIBLE
 
-            binding.messageFrom.text = intent.extras!!
+            messageFrom.text = intent.extras!!
                 .getString("MessageFrom")
 
-            binding.messageScore.text = intent.extras!!
+            messageScore.text = intent.extras!!
                 .getDouble("Score").toString()
 
-            binding.textMessage.text = intent.extras!!
+            textMessage.text = intent.extras!!
                 .getString("SmsText")
 
-            binding.totalResult.text = intent.extras!!
+            totalResult.text = intent.extras!!
                 .getString("TextResult")
 
 
@@ -133,47 +138,46 @@ class MainActivity : AppCompatActivity() {
 
         } else {
 
-            if (SharedPreference(this)
+            if (SharedPreference(this@MainActivity)
                     .getStringPreference("SmsText") != null
             ) {
 
-                when (SharedPreference(this).getBoolPreference("IsSpam")!!) {
+                when (SharedPreference(this@MainActivity).getBoolPreference("IsSpam")!!) {
                     true -> {
-                        binding.circleError.visibility = View.VISIBLE
-                        binding.errorIcon.visibility = View.VISIBLE
-                        binding.circlePass.visibility = View.GONE
-                        binding.passIcon.visibility = View.GONE
+                        circleError.visibility = View.VISIBLE
+                       errorIcon.visibility = View.VISIBLE
+                        circlePass.visibility = View.GONE
+                        passIcon.visibility = View.GONE
                     }
                     false -> {
-                        binding.circlePass.visibility = View.VISIBLE
-                        binding.passIcon.visibility = View.VISIBLE
-                        binding.circleError.visibility = View.GONE
-                        binding.errorIcon.visibility = View.GONE
+                        circlePass.visibility = View.VISIBLE
+                        passIcon.visibility = View.VISIBLE
+                        circleError.visibility = View.GONE
+                        errorIcon.visibility = View.GONE
                     }
                 }
 
-                binding.noData.visibility = View.GONE
-                binding.title.visibility = View.VISIBLE
-                binding.messageFrom.visibility = View.VISIBLE
-                binding.messageScore.visibility = View.VISIBLE
-                binding.textMessage.visibility = View.VISIBLE
-                binding.totalResult.visibility = View.VISIBLE
-                binding.allMessages.visibility = View.VISIBLE
-                binding.messageFromLabel.visibility = View.VISIBLE
-                binding.messageScoreLabel.visibility = View.VISIBLE
-                binding.textMessageLabel.visibility = View.VISIBLE
-                binding.totalResultLabel.visibility = View.VISIBLE
+                noData.visibility = View.GONE
+                title.visibility = View.VISIBLE
+                messageFrom.visibility = View.VISIBLE
+                messageScore.visibility = View.VISIBLE
+                textMessage.visibility = View.VISIBLE
+                totalResult.visibility = View.VISIBLE
+                allMessages.visibility = View.VISIBLE
+                messageFromLabel.visibility = View.VISIBLE
+                messageScoreLabel.visibility = View.VISIBLE
+                textMessageLabel.visibility = View.VISIBLE
+                totalResultLabel.visibility = View.VISIBLE
 
-                binding.messageFrom.text = SharedPreference(this)
+               messageFrom.text = SharedPreference(this@MainActivity)
                     .getStringPreference("MessageFrom")
-
-                binding.messageScore.text = SharedPreference(this)
+                messageScore.text = SharedPreference(this@MainActivity)
                     .getStringPreference("Score")
 
-                binding.textMessage.text = SharedPreference(this)
+                textMessage.text = SharedPreference(this@MainActivity)
                     .getStringPreference("SmsText")
 
-                binding.totalResult.text = SharedPreference(this)
+                totalResult.text = SharedPreference(this@MainActivity)
                     .getStringPreference("TextResult")
 
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -183,22 +187,22 @@ class MainActivity : AppCompatActivity() {
 
             } else {
 
-                binding.circlePass.visibility = View.GONE
-                binding.passIcon.visibility = View.GONE
-                binding.circleError.visibility = View.GONE
-                binding.errorIcon.visibility = View.GONE
-                binding.noData.visibility = View.VISIBLE
-                binding.title.visibility = View.GONE
-                binding.messageFrom.visibility = View.GONE
-                binding.messageScore.visibility = View.GONE
-                binding.textMessage.visibility = View.GONE
-                binding.totalResult.visibility = View.GONE
-                binding.allMessages.visibility = View.GONE
+                circlePass.visibility = View.GONE
+                passIcon.visibility = View.GONE
+                circleError.visibility = View.GONE
+                errorIcon.visibility = View.GONE
+                noData.visibility = View.VISIBLE
+                title.visibility = View.GONE
+                messageFrom.visibility = View.GONE
+                messageScore.visibility = View.GONE
+                textMessage.visibility = View.GONE
+                totalResult.visibility = View.GONE
+                allMessages.visibility = View.GONE
 
-                binding.messageFromLabel.visibility = View.GONE
-                binding.messageScoreLabel.visibility = View.GONE
-                binding.textMessageLabel.visibility = View.GONE
-                binding.totalResultLabel.visibility = View.GONE
+               messageFromLabel.visibility = View.GONE
+                messageScoreLabel.visibility = View.GONE
+                textMessageLabel.visibility = View.GONE
+                totalResultLabel.visibility = View.GONE
 
 
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -207,7 +211,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
+    }
     }
 
     private fun addSms(context: Context?) {

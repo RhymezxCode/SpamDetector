@@ -10,34 +10,36 @@ import kotlinx.coroutines.launch
 
 class SmsViewModel(application: Application) : AndroidViewModel(application) {
 
-    var smsRepository: CheckForSpamRepository.DbRepository? = null
-    var resultList: LiveData<List<SmsMlResult>>? = null
-    var count: LiveData<Int>? = null
+    private var smsRepository: CheckForSpamRepository.DbRepository? = null
+    private var resultList: LiveData<List<SmsMlResult>>? = null
+    private var count: LiveData<Int>? = null
 
     init {
         smsRepository = CheckForSpamRepository().DbRepository(application)
-        resultList = smsRepository!!.getAllSms()
+        resultList = smsRepository?.getAllSms()
     }
 
     fun insertSmsNow(result: SmsMlResult?) = viewModelScope.launch {
         insertSms(result)
     }
 
-    fun getAllSms(): LiveData<List<SmsMlResult>> {
-        return smsRepository!!.getAllSms()
+    fun getAllSms(): LiveData<List<SmsMlResult>>? {
+        return smsRepository?.getAllSms()
     }
 
     private fun insertSms(result: SmsMlResult?) {
-        smsRepository!!.insertSms(result!!)
+        if (result != null) {
+            smsRepository?.insertSms(result)
+        }
     }
 
     fun checkSms(text: String?, realText: String?) =
         viewModelScope.launch {
-            count = smsRepository!!.checkSms(text, realText)
+            count = smsRepository?.checkSms(text, realText)
         }
 
-    fun getCheckedSms(): LiveData<Int> {
-        return count!!
+    fun getCheckedSms(): LiveData<Int>? {
+        return count
     }
 }
 

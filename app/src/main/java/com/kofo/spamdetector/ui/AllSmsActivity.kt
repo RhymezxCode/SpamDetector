@@ -31,7 +31,7 @@ class AllSmsActivity : AppCompatActivity(), SmsListAdapter.ClickListener {
         smsListAdapter = SmsListAdapter()
         smsListAdapter!!.setClickListener(this)
 
-        smsViewModel!!.getAllSms().observe(this) {
+        smsViewModel?.getAllSms()?.observe(this) {
             if (it.isEmpty()) {
 
                 binding.noData.visibility = View.VISIBLE
