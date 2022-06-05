@@ -4,242 +4,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/top_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/purple_700"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.messages.MainActivity">
 
-            <TextView
-                android:id="@+id/app_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/roboto_bold"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/top_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:background="@color/purple_500"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/no_data"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="50dp"
-            android:fontFamily="@font/roboto"
-            android:text="No data yet, when you recieve a message you will see the result here, when you swipe to refresh!"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_label" />
+                    <TextView
+                        android:id="@+id/top_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Messages"
+                        android:textColor="@color/white"
+                        android:textSize="34sp"
+                        app:layout_constraintEnd_toStartOf="@+id/search"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Spam Result"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_label" />
+                    <ImageView
+                        android:id="@+id/search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="3dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/top_label"
+                        app:layout_constraintEnd_toStartOf="@+id/menu"
+                        app:layout_constraintTop_toTopOf="@+id/top_label"
+                        app:srcCompat="@drawable/ic_research" />
 
-        <ImageView
-            android:id="@+id/circle_pass"
-            android:layout_width="115dp"
-            android:layout_height="128dp"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/circle_pass"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_label" />
+                    <ImageView
+                        android:id="@+id/menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/search"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/search"
+                        app:srcCompat="@drawable/ic_menu" />
 
-        <ImageView
-            android:id="@+id/pass_icon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/circle_pass"
-            app:layout_constraintEnd_toEndOf="@+id/circle_pass"
-            app:layout_constraintStart_toStartOf="@+id/circle_pass"
-            app:layout_constraintTop_toTopOf="@+id/circle_pass"
-            app:srcCompat="@drawable/pass_icon" />
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="80dp"
+                        android:orientation="vertical"
+                        android:padding="0dp"
+                        app:collapseIcon="@null"
+                        app:contentInsetStart="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/top_label">
 
-        <ImageView
-            android:id="@+id/circle_error"
-            android:layout_width="115dp"
-            android:layout_height="128dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/error_circle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_label" />
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:background="@null"
+                            app:tabGravity="fill"
+                            app:tabIconTint="@null"
+                            app:tabIndicatorAnimationMode="elastic"
+                            app:tabIndicatorColor="@color/purple_500"
+                            app:tabIndicatorGravity="stretch"
+                            app:tabMode="fixed"
+                            app:tabRippleColor="@null"
+                            app:tabSelectedTextColor="@color/messages_color"
+                            app:tabTextColor="@color/white"
+                            app:tabUnboundedRipple="false"
+                            tools:ignore="SpeakableTextPresentCheck" />
+                    </androidx.appcompat.widget.Toolbar>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/error_icon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/circle_error"
-            app:layout_constraintEnd_toEndOf="@+id/circle_error"
-            app:layout_constraintStart_toStartOf="@+id/circle_error"
-            app:layout_constraintTop_toTopOf="@+id/circle_error"
-            app:srcCompat="@drawable/error_icon" />
+                <TextView
+                    android:id="@+id/no_data"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="300dp"
+                    android:layout_marginEnd="50dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="No data yet, when you recieve a message you will see the result here, when you swipe to refresh!"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
-        <TextView
-            android:id="@+id/message_from_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="100dp"
-            android:fontFamily="@font/roboto"
-            android:text="Message from: "
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/top_bar"
+                    app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:id="@+id/message_from"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="GTBANK"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/message_from_label"
-            app:layout_constraintTop_toTopOf="@+id/message_from_label" />
 
-        <TextView
-            android:id="@+id/message_score_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/roboto"
-            android:text="Message score: "
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message_from_label" />
-
-        <TextView
-            android:id="@+id/message_score"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="2.5"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/message_score_label"
-            app:layout_constraintTop_toTopOf="@+id/message_score_label" />
-
-        <TextView
-            android:id="@+id/text_message_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/roboto"
-            android:text="Text Message:"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message_score_label" />
-
-        <TextView
-            android:id="@+id/text_message"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/roboto"
-            android:text="ergdcvsdrgefrfdcgvefgefdcgvcrcfgrvevgbrtfdygb65trfdyge5crtgvtrfdyg65trv"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/message_score"
-            app:layout_constraintTop_toTopOf="@+id/text_message_label" />
-
-        <TextView
-            android:id="@+id/total_result_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/roboto"
-            android:text="Total Result:"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_message" />
-
-        <TextView
-            android:id="@+id/total_result"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/roboto"
-            android:text="ergdcvsdrgefrfdcgvefgefdcgvcrcfgrvevgbrtfdygb65trfdyge5crtgvtrfdyg65trv"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/text_message"
-            app:layout_constraintTop_toTopOf="@+id/total_result_label" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/allMessages"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="30dp"
-            android:drawablePadding="20dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="true"
+            android:background="@color/messages_color"
+            android:drawableTop="@drawable/ic_chat_bubble"
             android:fontFamily="@font/roboto_bold"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="Show All Messages"
-            android:textColor="@color/purple_700"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            app:drawableStartCompat="@drawable/ic_baseline_arrow_forward_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/total_result" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            android:gravity="center|center_horizontal"
+            android:padding="10dp"
+            android:text="Messages"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="163dp"
+            tools:layout_editor_absoluteY="627dp" />
+    </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

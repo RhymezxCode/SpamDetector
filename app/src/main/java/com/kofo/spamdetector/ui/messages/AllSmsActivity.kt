@@ -1,4 +1,4 @@
-package com.kofo.spamdetector.ui
+package com.kofo.spamdetector.ui.messages
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,7 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kofo.spamdetector.data.model.SmsMlResult
-import com.kofo.spamdetector.data.service.ActivityStarter
 import com.kofo.spamdetector.databinding.ActivityAllSmsBinding
 
 class AllSmsActivity : AppCompatActivity(), SmsListAdapter.ClickListener {

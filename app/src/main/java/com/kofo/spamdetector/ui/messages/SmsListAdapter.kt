@@ -1,4 +1,4 @@
-package com.kofo.spamdetector.ui
+package com.kofo.spamdetector.ui.messages
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -15,7 +15,7 @@ import com.kofo.spamdetector.data.model.SmsMlResult
 class SmsListAdapter :
     RecyclerView.Adapter<SmsListAdapter.SmsHolder>() {
     private var allSms: List<SmsMlResult> = ArrayList()
-    var activity: Activity? = Activity()
+    private var activity: Activity? = Activity()
     private var clickListener: ClickListener? = null
 
     fun setAllSms(activity: Activity, AllSms: List<SmsMlResult>) {

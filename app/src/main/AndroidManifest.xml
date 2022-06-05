@@ -19,7 +19,7 @@
         android:theme="@style/Theme.SpamDetector"
         tools:targetApi="31">
         <activity
-            android:name=".ui.SplashScreen"
+            android:name=".ui.splashScreen.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +28,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.AllSmsActivity"
+            android:name=".ui.messages.AllSmsActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.messages.MainActivity"
             android:exported="true">
         </activity>
 

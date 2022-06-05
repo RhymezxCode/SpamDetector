@@ -1,13 +1,12 @@
-package com.kofo.spamdetector.ui
+package com.kofo.spamdetector.ui.splashScreen
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kofo.spamdetector.R
 import com.kofo.spamdetector.data.service.ActivityStarter
-import com.kofo.spamdetector.databinding.ActivityAllSmsBinding
 import com.kofo.spamdetector.databinding.ActivitySplashScreenBinding
+import com.kofo.spamdetector.ui.messages.MainActivity
 
 class SplashScreen : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding

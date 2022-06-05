@@ -1,4 +1,4 @@
-package com.kofo.spamdetector.ui
+package com.kofo.spamdetector.ui.messages
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

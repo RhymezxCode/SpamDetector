@@ -1,4 +1,4 @@
-package com.kofo.spamdetector.ui
+package com.kofo.spamdetector.ui.messages
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -28,7 +28,7 @@ import com.kofo.spamdetector.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var backPass: Long? = 0
-    var smsViewModel: SmsViewModel? = null
+    private var smsViewModel: SmsViewModel? = null
     private lateinit var binding: ActivityMainBinding
 
     fun getMainActivityIntent(context: Context?): Intent {
@@ -98,38 +98,38 @@ class MainActivity : AppCompatActivity() {
             toast("From Bundle")
             when (intent.extras!!.getBoolean("Status")) {
                 true -> {
-                    circleError.visibility = View.VISIBLE
-                    errorIcon.visibility = View.VISIBLE
-                    circlePass.visibility = View.GONE
-                    passIcon.visibility = View.GONE
+//                    circleError.visibility = View.VISIBLE
+//                    errorIcon.visibility = View.VISIBLE
+//                    circlePass.visibility = View.GONE
+//                    passIcon.visibility = View.GONE
                 }
                 false -> {
-                    circlePass.visibility = View.VISIBLE
-                    passIcon.visibility = View.VISIBLE
-                    circleError.visibility = View.GONE
-                    errorIcon.visibility = View.GONE
+//                    circlePass.visibility = View.VISIBLE
+//                    passIcon.visibility = View.VISIBLE
+//                    circleError.visibility = View.GONE
+//                    errorIcon.visibility = View.GONE
                 }
             }
 
             noData.visibility = View.GONE
-            title.visibility = View.VISIBLE
-            messageFrom.visibility = View.VISIBLE
-            messageScore.visibility = View.VISIBLE
-            textMessage.visibility = View.VISIBLE
-            totalResult.visibility = View.VISIBLE
-            allMessages.visibility = View.VISIBLE
+//            title.visibility = View.VISIBLE
+//            messageFrom.visibility = View.VISIBLE
+//            messageScore.visibility = View.VISIBLE
+//            textMessage.visibility = View.VISIBLE
+//            totalResult.visibility = View.VISIBLE
+//            allMessages.visibility = View.VISIBLE
 
-            messageFrom.text = intent.extras!!
-                .getString("MessageFrom")
-
-            messageScore.text = intent.extras!!
-                .getDouble("Score").toString()
-
-            textMessage.text = intent.extras!!
-                .getString("SmsText")
-
-            totalResult.text = intent.extras!!
-                .getString("TextResult")
+//            messageFrom.text = intent.extras!!
+//                .getString("MessageFrom")
+//
+//            messageScore.text = intent.extras!!
+//                .getDouble("Score").toString()
+//
+//            textMessage.text = intent.extras!!
+//                .getString("SmsText")
+//
+//            totalResult.text = intent.extras!!
+//                .getString("TextResult")
 
 
             Handler(Looper.getMainLooper()).postDelayed({
@@ -142,43 +142,44 @@ class MainActivity : AppCompatActivity() {
                     .getStringPreference("SmsText") != null
             ) {
 
-                when (SharedPreference(this@MainActivity).getBoolPreference("IsSpam")!!) {
+                when (SharedPreference(this@MainActivity)
+                    .getBoolPreference("IsSpam")!!) {
                     true -> {
-                        circleError.visibility = View.VISIBLE
-                       errorIcon.visibility = View.VISIBLE
-                        circlePass.visibility = View.GONE
-                        passIcon.visibility = View.GONE
+//                        circleError.visibility = View.VISIBLE
+//                       errorIcon.visibility = View.VISIBLE
+//                        circlePass.visibility = View.GONE
+//                        passIcon.visibility = View.GONE
                     }
                     false -> {
-                        circlePass.visibility = View.VISIBLE
-                        passIcon.visibility = View.VISIBLE
-                        circleError.visibility = View.GONE
-                        errorIcon.visibility = View.GONE
+//                        circlePass.visibility = View.VISIBLE
+//                        passIcon.visibility = View.VISIBLE
+//                        circleError.visibility = View.GONE
+//                        errorIcon.visibility = View.GONE
                     }
                 }
 
                 noData.visibility = View.GONE
-                title.visibility = View.VISIBLE
-                messageFrom.visibility = View.VISIBLE
-                messageScore.visibility = View.VISIBLE
-                textMessage.visibility = View.VISIBLE
-                totalResult.visibility = View.VISIBLE
+//                title.visibility = View.VISIBLE
+//                messageFrom.visibility = View.VISIBLE
+//                messageScore.visibility = View.VISIBLE
+//                textMessage.visibility = View.VISIBLE
+//                totalResult.visibility = View.VISIBLE
                 allMessages.visibility = View.VISIBLE
-                messageFromLabel.visibility = View.VISIBLE
-                messageScoreLabel.visibility = View.VISIBLE
-                textMessageLabel.visibility = View.VISIBLE
-                totalResultLabel.visibility = View.VISIBLE
+//                messageFromLabel.visibility = View.VISIBLE
+//                messageScoreLabel.visibility = View.VISIBLE
+//                textMessageLabel.visibility = View.VISIBLE
+//                totalResultLabel.visibility = View.VISIBLE
 
-               messageFrom.text = SharedPreference(this@MainActivity)
-                    .getStringPreference("MessageFrom")
-                messageScore.text = SharedPreference(this@MainActivity)
-                    .getStringPreference("Score")
-
-                textMessage.text = SharedPreference(this@MainActivity)
-                    .getStringPreference("SmsText")
-
-                totalResult.text = SharedPreference(this@MainActivity)
-                    .getStringPreference("TextResult")
+//               messageFrom.text = SharedPreference(this@MainActivity)
+//                    .getStringPreference("MessageFrom")
+//                messageScore.text = SharedPreference(this@MainActivity)
+//                    .getStringPreference("Score")
+//
+//                textMessage.text = SharedPreference(this@MainActivity)
+//                    .getStringPreference("SmsText")
+//
+//                totalResult.text = SharedPreference(this@MainActivity)
+//                    .getStringPreference("TextResult")
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     toast("last spam result!!!")
@@ -187,22 +188,22 @@ class MainActivity : AppCompatActivity() {
 
             } else {
 
-                circlePass.visibility = View.GONE
-                passIcon.visibility = View.GONE
-                circleError.visibility = View.GONE
-                errorIcon.visibility = View.GONE
+//                circlePass.visibility = View.GONE
+//                passIcon.visibility = View.GONE
+//                circleError.visibility = View.GONE
+//                errorIcon.visibility = View.GONE
                 noData.visibility = View.VISIBLE
-                title.visibility = View.GONE
-                messageFrom.visibility = View.GONE
-                messageScore.visibility = View.GONE
-                textMessage.visibility = View.GONE
-                totalResult.visibility = View.GONE
+//                title.visibility = View.GONE
+//                messageFrom.visibility = View.GONE
+//                messageScore.visibility = View.GONE
+//                textMessage.visibility = View.GONE
+//                totalResult.visibility = View.GONE
                 allMessages.visibility = View.GONE
 
-               messageFromLabel.visibility = View.GONE
-                messageScoreLabel.visibility = View.GONE
-                textMessageLabel.visibility = View.GONE
-                totalResultLabel.visibility = View.GONE
+//               messageFromLabel.visibility = View.GONE
+//                messageScoreLabel.visibility = View.GONE
+//                textMessageLabel.visibility = View.GONE
+//                totalResultLabel.visibility = View.GONE
 
 
                 Handler(Looper.getMainLooper()).postDelayed({

@@ -12,13 +12,12 @@ import android.telephony.SmsMessage
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.LiveData
 import com.kofo.spamdetector.R
 import com.kofo.spamdetector.application.SpamDetectorApplication
 import com.kofo.spamdetector.data.model.SmsMlResult
 import com.kofo.spamdetector.data.preference.SharedPreference
 import com.kofo.spamdetector.data.repository.CheckForSpamRepository
-import com.kofo.spamdetector.ui.MainActivity
+import com.kofo.spamdetector.ui.messages.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
