@@ -212,16 +212,30 @@ class MainActivity : AppCompatActivity() {
 
     private fun addSms(context: Context?) {
         smsViewModel!!.insertSmsNow(
-            SmsMlResult(
-                null,
-                SharedPreference(context!!).getBoolPreference("IsSpam")!!,
-                SharedPreference(context).getStringPreference("TextResult")!!,
-                SharedPreference(context).getStringPreference("Score")!!.toDouble(),
-                SharedPreference(context).getStringPreference("SmsText")!!,
-                SharedPreference(context).getStringPreference("MessageFrom")!!,
-                SharedPreference(context).getStringPreference("MessageText")!!,
-                ""
-            )
+            SharedPreference(context!!).getBoolPreference("IsSpam")?.let { isSpam ->
+                SharedPreference(context).getStringPreference("TextResult")?.let { textResult ->
+                    SharedPreference(context).getStringPreference("Score")?.let { score ->
+                        SharedPreference(context).getStringPreference("SmsText")?.let { smsText ->
+                            SharedPreference(context).getStringPreference("MessageFrom")
+                                ?.let { messageFrom ->
+                                    SharedPreference(context).getStringPreference("MessageText")
+                                        ?.let { messageText ->
+                                            SmsMlResult(
+                                                null,
+                                                isSpam,
+                                                textResult,
+                                                score.toDouble(),
+                                                smsText,
+                                                messageFrom,
+                                                messageText,
+                                                ""
+                                            )
+                                        }
+                                }
+                        }
+                    }
+                }
+            }
         )
     }
 
@@ -251,7 +265,10 @@ class MainActivity : AppCompatActivity() {
     private fun showSettingsDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setTitle("Need Permissions")
-        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.")
+        builder.setMessage(
+            "This app needs permission to use this feature. " +
+                    "You can grant them in app settings."
+        )
         builder.setPositiveButton(
             "GOTO SETTINGS"
         ) { dialog, _ ->
