@@ -13,6 +13,7 @@ class SmsViewModel(application: Application) : AndroidViewModel(application) {
     private var smsRepository: CheckForSpamRepository.DbRepository? = null
     private var resultList: LiveData<List<SmsMlResult>>? = null
     private var count: LiveData<Int>? = null
+    private var result: LiveData<List<SmsMlResult>>? = null
 
     init {
         smsRepository = CheckForSpamRepository().DbRepository(application)
@@ -31,6 +32,16 @@ class SmsViewModel(application: Application) : AndroidViewModel(application) {
         if (result != null) {
             smsRepository?.insertSms(result)
         }
+    }
+
+    fun findSms(search: String?){
+        viewModelScope.launch {
+            result = search?.let { smsRepository?.findSms(it) }
+        }
+    }
+
+    fun getResult(): LiveData<List<SmsMlResult>>? {
+        return result
     }
 
     fun checkSms(text: String?, realText: String?) =

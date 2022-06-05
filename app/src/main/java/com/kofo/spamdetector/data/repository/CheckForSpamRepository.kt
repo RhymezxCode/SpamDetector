@@ -38,6 +38,10 @@ class CheckForSpamRepository {
             database!!.smsMlResultDao()!!.insertSmsMlResult(result)
         }
 
+        fun findSms(search: String): LiveData<List<SmsMlResult>> {
+          return database!!.smsMlResultDao()!!.find(search)
+        }
+
         fun checkSms(text: String?, realText: String?): LiveData<Int> {
             val data: MutableLiveData<Int> = MutableLiveData()
             val count: Int = resultDao?.checkSms(text, realText)!!

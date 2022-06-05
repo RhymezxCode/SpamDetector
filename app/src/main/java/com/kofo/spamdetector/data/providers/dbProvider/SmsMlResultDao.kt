@@ -14,6 +14,9 @@ interface SmsMlResultDao {
     @Query("SELECT * from SmsMlResult")
     fun getAllSmsMlResult(): LiveData<List<SmsMlResult>>
 
+    @Query("SELECT * from SmsMlResult where `from` LIKE :search")
+    fun find(search: String?): LiveData<List<SmsMlResult>>
+
     @Query("select Count() from SmsMlResult where text =:text and realText =:realText")
     fun checkSms(text: String?, realText: String?): Int
 }

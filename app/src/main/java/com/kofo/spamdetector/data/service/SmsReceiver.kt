@@ -24,10 +24,7 @@ import retrofit2.Response
 
 
 class SmsReceiver : BroadcastReceiver() {
-    var smsRepository: CheckForSpamRepository.DbRepository? = null
-    init {
-        smsRepository = CheckForSpamRepository().DbRepository(SpamDetectorApplication())
-    }
+
     override fun onReceive(p0: Context?, intent: Intent?) {
         val pdus: Array<*>
         val msgs: Array<SmsMessage?>
@@ -67,18 +64,6 @@ class SmsReceiver : BroadcastReceiver() {
                         ) {
                             if (response.code() == 200) {
 
-                                smsRepository!!.insertSms(
-                                    SmsMlResult(
-                                        null,
-                                        response.body()!!.is_spam,
-                                        response.body()!!.result,
-                                        response.body()!!.score,
-                                        response.body()!!.text,
-                                        msgFrom.toString(),
-                                        msgText.toString(),
-                                        ""
-                                    )
-                                )
                                 SharedPreference(p0).saveValue(
                                     "TextResult",
                                     response.body()!!.result
