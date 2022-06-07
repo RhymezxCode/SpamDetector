@@ -10,31 +10,31 @@
         android:id="@+id/welcome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:fontFamily="@font/roboto_bold"
         android:gravity="center"
         android:text="Welcome to Xspam"
         android:textColor="@color/black"
         android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="309dp"
-        android:layout_height="276dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <Button
         android:id="@+id/go"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="100dp"
         android:text="Let's go"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

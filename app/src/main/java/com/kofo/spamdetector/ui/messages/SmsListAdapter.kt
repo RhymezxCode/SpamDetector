@@ -57,6 +57,7 @@ class SmsListAdapter :
         }
         holder.messageFrom.text = "From: ${oneSms.from}"
         holder.messageText.text = oneSms.realText
+        holder.thresoldScore.text = "Score: ${oneSms.score}"
 
     }
 
@@ -68,6 +69,7 @@ class SmsListAdapter :
         var messageFrom: TextView = itemView.findViewById(R.id.message_from)
         var messageText: TextView = itemView.findViewById(R.id.message_text)
         var messageIcon: ImageView = itemView.findViewById(R.id.message_icon)
+        var thresoldScore: TextView = itemView.findViewById(R.id.score)
 
         init {
             itemView.setOnClickListener(this)

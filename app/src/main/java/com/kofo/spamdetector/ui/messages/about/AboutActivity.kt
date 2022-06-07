@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.kofo.spamdetector.R
 import com.kofo.spamdetector.databinding.ActivityAboutBinding
 import com.kofo.spamdetector.databinding.ActivitySearchBinding
@@ -18,6 +19,7 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -27,4 +29,7 @@ class AboutActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
 }

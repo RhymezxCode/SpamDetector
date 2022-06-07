@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +30,7 @@ class SearchActivity : AppCompatActivity(), SmsListAdapter.ClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

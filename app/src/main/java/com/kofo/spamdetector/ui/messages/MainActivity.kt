@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -44,52 +45,56 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         smsViewModel = ViewModelProvider(this)[SmsViewModel::class.java]
+        //permission
+        permission()
 
+        //get data
+        data()
+
+        checkSmsRedundancyAndInsert()
         with(binding) {
-            //permission
-            permission()
-
-            //get data
-            data()
-
-            checkSmsRedundancyAndInsert()
-
-            root.setOnRefreshListener {
+            refresher.isEnabled = false
+            refresher.setOnRefreshListener {
 
                 data()
 
                 checkSmsRedundancyAndInsert()
 
-                root.isRefreshing = false
+                refresher.isRefreshing = false
             }
 
-            binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Ham"))
-            binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Spam"))
+
+            tabLayout.addTab(binding.tabLayout.newTab().setText("Ham"))
+            tabLayout.addTab(binding.tabLayout.newTab().setText("Spam"))
 
             val fragmentManager: FragmentManager = this@MainActivity.supportFragmentManager
             adapter = MessagesTabAdapter(fragmentManager, lifecycle)
-            binding.viewPager2.adapter = adapter
+            viewPager2.adapter = adapter
 
 
-            binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            tabLayout.addOnTabSelectedListener(object :
+                TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    binding.viewPager2.currentItem = tab.position
+                    viewPager2.currentItem = tab.position
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {}
                 override fun onTabReselected(tab: TabLayout.Tab) {}
             })
 
-            binding.viewPager2.registerOnPageChangeCallback(object :
+            viewPager2.registerOnPageChangeCallback(object :
                 ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
+                    tabLayout.selectTab(binding.tabLayout.getTabAt(position))
                 }
             })
+
 
 
             allMessages.setOnClickListener {
@@ -174,9 +179,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun addSms(context: Context?) {
+    private fun addSms(context: Context) {
         smsViewModel!!.insertSmsNow(
-            SharedPreference(context!!)
+            SharedPreference(context)
                 .getBoolPreference("IsSpam")?.let { isSpam ->
                     SharedPreference(context)
                         .getStringPreference("TextResult")?.let { textResult ->
@@ -272,7 +277,8 @@ class MainActivity : AppCompatActivity() {
                 findViewById(android.R.id.content),
                 "Touch again to exit",
                 Snackbar.LENGTH_SHORT
-            ).show()
+            ).setAnchorView(binding.allMessages)
+                .show()
             backPass = System.currentTimeMillis()
         }
     }

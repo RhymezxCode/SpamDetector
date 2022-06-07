@@ -11,25 +11,22 @@
     <ImageView
         android:id="@+id/message_icon"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/message_text"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/message_from"
         app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
     <TextView
         android:id="@+id/message_from"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:ellipsize="end"
         android:fontFamily="@font/roboto_bold"
         android:text="07088808260"
         android:textColor="@color/black"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/time"
         app:layout_constraintStart_toEndOf="@+id/message_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,35 +36,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
         android:ellipsize="end"
         android:fontFamily="@font/roboto"
         android:text="This is to inform you of the data plan."
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/message_from"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/message_icon"
         app:layout_constraintTop_toBottomOf="@+id/message_from" />
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message_text" />
 
     <TextView
-        android:id="@+id/time"
+        android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
-        android:text="3hr ago"
+        android:fontFamily="@font/roboto_bold"
+        android:text="score: 6.5"
         android:textSize="10sp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/message_from"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/message_from" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,8 +2,12 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresher"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_wrapBehaviorInParent="vertical_only"
+    tools:context=".ui.messages.MainActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -11,7 +15,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.messages.MainActivity">
+            android:layout_above="@+id/allMessages"
+            android:layout_marginBottom="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/top_bar"
@@ -86,7 +91,7 @@
                         app:tabIndicatorGravity="stretch"
                         app:tabMode="fixed"
                         app:tabRippleColor="@null"
-                        app:tabSelectedTextColor="@color/black"
+                        app:tabSelectedTextColor="@android:color/darker_gray"
                         app:tabTextColor="@color/white"
                         app:tabUnboundedRipple="false"
                         tools:ignore="SpeakableTextPresentCheck" />
@@ -101,7 +106,7 @@
                 android:layout_marginTop="300dp"
                 android:layout_marginEnd="50dp"
                 android:fontFamily="@font/roboto"
-                android:text="No data yet, when you recieve a message you will see the result here, when you swipe to refresh!"
+                android:text="No data yet, when you recieve a message you will see the result here!"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:visibility="gone"
@@ -114,21 +119,21 @@
                 android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/top_bar"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <TextView
             android:id="@+id/allMessages"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_alignParentLeft="false"
             android:layout_alignParentBottom="true"
             android:background="@color/messages_color"
