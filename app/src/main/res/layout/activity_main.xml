@@ -56,6 +56,7 @@
                     app:layout_constraintTop_toTopOf="@+id/top_label"
                     app:srcCompat="@drawable/ic_research" />
 
+
                 <ImageView
                     android:id="@+id/menu"
                     android:layout_width="wrap_content"
@@ -98,6 +99,19 @@
                 </androidx.appcompat.widget.Toolbar>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/refreshPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                app:tint="@color/white"
+                android:clickable="true"
+                app:backgroundTint="@color/purple_500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_baseline_refresh_24" />
+
             <TextView
                 android:id="@+id/no_data"
                 android:layout_width="0dp"
@@ -124,8 +138,9 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/top_bar"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0">
 
+            </androidx.viewpager2.widget.ViewPager2>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

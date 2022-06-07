@@ -60,14 +60,13 @@ class MainActivity : AppCompatActivity() {
         checkSmsRedundancyAndInsert()
         with(binding) {
             refresher.isEnabled = false
-            refresher.setOnRefreshListener {
+            refreshPage.setOnClickListener {
 
                 data()
 
                 checkSmsRedundancyAndInsert()
 
-                refresher.isRefreshing = false
-            }
+        }
 
 
             tabLayout.addTab(binding.tabLayout.newTab().setText("Ham"))
@@ -131,6 +130,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         smsViewModel?.getCheckedSms()?.observe(this) {
+
             if (it > 0) {
                 toast("SMS already exists in database")
             } else {
